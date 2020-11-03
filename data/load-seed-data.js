@@ -30,7 +30,7 @@ async function run() {
                     INSERT INTO authors (author_name, published_books, living, born, owner_id)
                     VALUES ($1, $2, $3, $4, $5);
                 `,
-        [authors.name, authors.published_books, authors.living, authors.born, user.id]);
+        [authors.author_name, authors.published_books, authors.living, authors.born, user.id]);
       })
     );
     
