@@ -17,7 +17,7 @@ async function run() {
                     email VARCHAR(256) NOT NULL,
                     hash VARCHAR(512) NOT NULL
                 );           
-                CREATE TABLE animals (
+                CREATE TABLE authors (
                     id SERIAL PRIMARY KEY NOT NULL,
                     author_name VARCHAR(512) NOT NULL,
                     published_books INTEGER NOT NULL,
