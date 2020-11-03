@@ -27,10 +27,10 @@ async function run() {
     await Promise.all(
       authors.map(authors => {
         return client.query(`
-                    INSERT INTO authors (author_name, published_books, owner_id)
-                    VALUES ($1, $2, $3);
+                    INSERT INTO authors (author_name, published_books, living, born, owner_id)
+                    VALUES ($1, $2, $3, $4, $5);
                 `,
-        [authors.name, authors.published_books, user.id]);
+        [authors.name, authors.published_books, authors.living, authors.born, user.id]);
       })
     );
     

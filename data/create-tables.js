@@ -21,6 +21,8 @@ async function run() {
                     id SERIAL PRIMARY KEY NOT NULL,
                     author_name VARCHAR(512) NOT NULL,
                     published_books INTEGER NOT NULL,
+                    living BOOLEAN NOT NULL,
+                    born VARCHAR(512) NOT NULL
                     owner_id INTEGER NOT NULL REFERENCES users(id)
             );
         `);
