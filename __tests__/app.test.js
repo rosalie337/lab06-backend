@@ -42,5 +42,42 @@ describe('app routes', () => {
 
       expect(data.body).toEqual(expectation);
     });
+    
+    test('returns a single author', async() => {
+
+      const expectation = { 'id':1, 'author_name':'Audre Lord', 'published_books':18, 'living':false, 'born':'New York, NY', 'owner_id':1 };
+
+      const data = await fakeRequest(app)
+        .get('/authors/1')
+        .expect('Content-Type', /json/)
+        .expect(200);
+
+      expect(data.body).toEqual(expectation);
+    });
+
+    test('posts a new author to the database and returns it', async() => {
+
+      const expectation = { 'id':13, 'author_name':'Patricia Hill Collins', 'published_books':18, 'living':true, 'born':'Philadelphia, PA', 'owner_id':2 };
+
+      const data = await fakeRequest(app)
+        .post('/authors/')
+        .send({ 
+          author_name:'Patricia Hill Collins', 
+          published_books:18, 
+          living:true, 
+          born:'Philadelphia, PA', 
+          owner_id:2
+        })
+        .expect('Content-Type', /json/)
+        .expect(200);
+
+      const allAuthors = await fakeRequest(app)
+        .get('/authors/')
+        .expect('Content-Type', /json/)
+        .expect(200);
+        
+      expect(data.body).toEqual(expectation);
+      expect(allAuthors.body.length).toEqual(13);
+    });
   });
 });
