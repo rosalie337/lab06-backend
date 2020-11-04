@@ -79,5 +79,37 @@ describe('app routes', () => {
       expect(data.body).toEqual(expectation);
       expect(allAuthors.body.length).toEqual(13);
     });
+
+    test('updates an author in the database and returns it', async() => {
+
+      const expectation = { 'id':1, 'author_name':'Audre Lord', 'published_books':19, 'living':true, 'born':'New York, NY', 'owner_id':1 };
+
+      const data = await fakeRequest(app)
+        .put('/authors/1')
+        .send({ 
+          id: 1, 
+          author_name: 'Audre Lord', 
+          published_books: 19, 
+          living: true, 
+          born: 'New York, NY', 
+          owner_id: 1
+        })
+        .expect('Content-Type', /json/)
+        .expect(200);
+
+      expect(data.body).toEqual(expectation);
+    });
+
+    test('deletes an author', async() => {
+
+      const expectation = '';
+
+      const data = await fakeRequest(app)
+        .delete('/authors/1')
+        .expect('Content-Type', /json/)
+        .expect(200);
+
+      expect(data.body).toEqual(expectation);
+    });
   });
 });
