@@ -31,34 +31,35 @@ describe('app routes', () => {
       return client.end(done);
     });
 
-  test('returns authors', async() => {
+    test('returns authors', async() => {
 
-    const expectation = [
-      {
-        'id': 1,
-        'name': 'bessie',
-        'coolfactor': 3,
-        'owner_id': 1
-      },
-      {
-        'id': 2,
-        'name': 'jumpy',
-        'coolfactor': 4,
-        'owner_id': 1
-      },
-      {
-        'id': 3,
-        'name': 'spot',
-        'coolfactor': 10,
-        'owner_id': 1
-      }
-    ];
+      const expectation = [
+        {
+          author_name: 'Audre Lord',
+          published_books: 18,
+          living: false,
+          born: 'New York, NY'
+        },
+        {
+          author_name: 'Assata Shakur',
+          published_books: 4,
+          living: true,
+          born: 'New York, NY'
+        },
+        {
+          author_name: 'Alice Walker',
+          published_books: 36,
+          living: true,
+          born: 'Eatonton, GA'
+        },
+      ];
 
-    const data = await fakeRequest(app)
-      .get('/authors')
-      .expect('Content-Type', /json/)
-      .expect(200);
+      const data = await fakeRequest(app)
+        .get('/authors')
+        .expect('Content-Type', /json/)
+        .expect(200);
 
-    expect(data.body).toEqual(expectation);
+      expect(data.body).toEqual(expectation);
+    });
   });
 });
