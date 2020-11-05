@@ -1,6 +1,6 @@
 const client = require('../lib/client');
 // import our seed data:
-const origin = require('./author-origin.js');
+const origins = require('./author-origin.js');
 const authors = require('./authors.js');
 const usersData = require('./users.js');
 const { getEmoji } = require('../lib/emoji.js');
@@ -24,13 +24,13 @@ async function run() {
     );
     
     await Promise.all(
-      origin.map(born => {
+      origins.map(item => {
         return client.query(`
-          INSERT INTO origin (born)
-          VALUE ($1)
+          INSERT INTO author_origin (born)
+          VALUES ($1)
           RETURNING *;
         `,
-        [origin.born]);
+        [item.born]);
       }) 
     );
 
