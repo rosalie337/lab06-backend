@@ -16,15 +16,24 @@ async function run() {
                     id SERIAL PRIMARY KEY,
                     email VARCHAR(256) NOT NULL,
                     hash VARCHAR(512) NOT NULL
+
                 );           
+                
+                CREATE TABLE author_origin (
+                    id SERIAL PRIMARY KEY NOT NULL,
+                    born VARCHAR(256) NOT NULL
+
+                );
+                
                 CREATE TABLE authors (
                     id SERIAL PRIMARY KEY NOT NULL,
-                    author_name VARCHAR(512) NOT NULL,
+                    author_name VARCHAR(256) NOT NULL,
                     published_books INTEGER NOT NULL,
                     living BOOLEAN NOT NULL,
-                    born VARCHAR(512) NOT NULL,
+                    born_id INTEGER NOT NULL REFERENCES author_origin(id),
                     owner_id INTEGER NOT NULL REFERENCES users(id)
-            );
+
+                 );
         `);
 
     console.log('create tables complete', getEmoji(), getEmoji(), getEmoji());

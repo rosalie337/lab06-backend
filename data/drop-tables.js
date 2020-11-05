@@ -10,6 +10,7 @@ async function run() {
     
     await client.query(`
             DROP TABLE IF EXISTS users CASCADE;
+            DROP TABLE IF EXISTS author_origin CASCADE;
             DROP TABLE IF EXISTS authors;
         `);
 
